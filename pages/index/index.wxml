@@ -4,8 +4,12 @@
          value="{{ todo }}"
          class="new-todo"/>
   <text class="add-todo"
-        ontap="addTodo">Add</text>
+        ontap="addTodo">Add.</text>
 </view>
+<block wx:for="{{list}}" wx:key="this">
+  <view>{{item.done}}:{{item.content}}</view>
+</block>
+
 
 
 

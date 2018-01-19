@@ -3,7 +3,17 @@ const Todo = require('../../model/todo')
 
 Page({
   data: {
-    todo: ''
+    todo: '',
+    list: []
+  },
+
+  onReady: function () {
+    new AV.Query(Todo)
+      .find()
+      .then( list => this.setData({
+        list
+      }))
+      .catch(console.error)
   },
 
   updateTodo: function ({
@@ -21,7 +31,7 @@ Page({
       content: this.data.todo,
       done: false
     }).save()
-      .then(console.log)
+      .then(console.log('success'))
       .catch(console.error)
   }
 })
