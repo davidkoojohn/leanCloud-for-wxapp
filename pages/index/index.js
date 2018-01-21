@@ -16,13 +16,9 @@ Page({
       .catch(console.error)
   },
 
-  updateTodo: function ({
-    detail: {
-      value
-    }
-  }) {
+  updateTodo: function (e) {
     this.setData({
-      todo: value
+      todo: e.detail.value
     })
   },
 
