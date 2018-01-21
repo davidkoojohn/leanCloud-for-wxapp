@@ -27,7 +27,12 @@ Page({
       content: this.data.todo,
       done: false
     }).save()
-      .then(console.log('success'))
+      .then((item) => {
+        this.setData({
+          list: [item, ...this.data.list],
+          todo: ''
+        })
+      })
       .catch(console.error)
   }
 })

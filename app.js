@@ -5,6 +5,4 @@ AV.init({
   appKey: '5aEPRwQPMUGCYl2oUY7f2Naw',
 });
 
-console.log(AV)
-
 App({})
