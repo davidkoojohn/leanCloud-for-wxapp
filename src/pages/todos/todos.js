@@ -12,7 +12,7 @@ Page({
   },
 
   onLoad: function () {
-    console.log(AV.User.current())
+    //console.log(AV.User.current())
 
     AV.User
       .loginWithWeapp()
@@ -26,13 +26,37 @@ Page({
               userInfo: res.userInfo
             })
 
+            new AV.Query(Consumer)
+              .includeACL(AV.Uesr)
+              .find()
+              .then( list => {
+                
+                if (list) {
+                  const itemID = list[0].id
+                  AV.Object
+                    .createWithoutData('Consumer', itemID)
+                    .set('nickName', 'woshezhidexinde')
+                    .save()
+
+                  console.log(list[0].nickName)
+                  console.log(list[0].avatarUrl)
+                }
+                console.log('===')
+                console.log(list[0].id, list[0].updatedAt)
+                console.log('===')
+                this.setData({
+                  consumers: list
+                })
+              })
+              .catch(console.error)
+
             var acl = new AV.ACL();
             acl.setPublicReadAccess(false);
             acl.setPublicWriteAccess(false);
             acl.setReadAccess(AV.User.current(), true);
             acl.setWriteAccess(AV.User.current(), true);
 
-            new Consumer({
+            /*new Consumer({
               nickName: res.userInfo.nickName,
               avatarUrl: res.userInfo.avatarUrl
             }).setACL(acl)
@@ -42,20 +66,12 @@ Page({
                   list: [item, ...this.data.consumers],
                 })
               })
-              .catch(console.error)
+              .catch(console.error)*/
           }
         })
       })
       .catch(console.error);
-
-    new AV.Query(Consumer)
-      .includeACL(AV.Uesr)
-      .find()
-      .then( list => this.setData({
-        consumers: list
-      }))
-      .catch(console.error)
-  },
+  }
 
 })
 
