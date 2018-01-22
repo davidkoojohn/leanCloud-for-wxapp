@@ -49,6 +49,7 @@ Page({
       .catch(console.error);
 
     new AV.Query(Consumer)
+      .includeACL(AV.Uesr)
       .find()
       .then( list => this.setData({
         consumers: list
