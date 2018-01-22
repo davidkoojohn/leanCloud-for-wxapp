@@ -1,1 +1,8 @@
 <view>{{ test }}</view>
+
+<block>
+  <view wx:for="{{consumers}}" wx:key="{{this}}">{{item.nickName}}</view>
+</block>
+
+<!--<navigator url="../index/index">index</navigator>-->
+
