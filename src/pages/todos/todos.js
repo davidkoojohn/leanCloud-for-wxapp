@@ -26,10 +26,17 @@ Page({
               userInfo: res.userInfo
             })
 
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(false);
+            acl.setPublicWriteAccess(false);
+            acl.setReadAccess(AV.User.current(), true);
+            acl.setWriteAccess(AV.User.current(), true);
+
             new Consumer({
               nickName: res.userInfo.nickName,
               avatarUrl: res.userInfo.avatarUrl
-            }).save()
+            }).setACL(acl)
+              .save()
               .then((item) => {
                 this.setData({
                   list: [item, ...this.data.consumers],
