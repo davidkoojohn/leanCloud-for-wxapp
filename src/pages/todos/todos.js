@@ -30,7 +30,7 @@ Page({
               .includeACL(AV.Uesr)
               .find()
               .then( list => {
-                
+
                 if (list) {
                   const itemID = list[0].id
                   AV.Object
